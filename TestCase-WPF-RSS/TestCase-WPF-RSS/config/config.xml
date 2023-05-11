@@ -2,9 +2,8 @@
 <Settings>
   <Application>
     <Database>
-      <Connection>
-
-      </Connection>
+      <Connection>Введите строку подключения к базе данных. Напимер: 
+      фыв</Connection>
     </Database>
   </Application>
 </Settings>
