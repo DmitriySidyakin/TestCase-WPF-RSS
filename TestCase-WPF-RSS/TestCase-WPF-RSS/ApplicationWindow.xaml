@@ -20,10 +20,14 @@
                     <Label x:Name="ConnectionStringCreateTablesLabel" Content="Нажмите создать таблицы, после проверки соединения, чтобы создать начальную структуру БД..." HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top"/>
                     <Button x:Name="BlockSettings" Content="Блокировать настройки на изменение" Margin="0,3,12,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="215" Click="BlockSettings_Click"/>
                     <Button x:Name="ConnectionStringConnectInDBButton" Content="Подключиться к БД" HorizontalAlignment="Left" Margin="254,214,0,0" VerticalAlignment="Top" Click="ConnectionStringConnectInDBButton_Click"/>
+                    <Label x:Name="ConnectionStringConnectInDBLabel" Content="Нажмите подключиться к БД, после создания таблиц." HorizontalAlignment="Left" Margin="10,291,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,0.196"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Создать Объект">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Label" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>

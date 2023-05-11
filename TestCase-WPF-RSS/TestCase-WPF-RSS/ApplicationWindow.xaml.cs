@@ -101,6 +101,7 @@ namespace TestCase_WPF_RSS
                 ConnectionStringCreateTablesButton.IsEnabled = false;
                 ConnectionStringCreateTablesLabel.IsEnabled = false;
                 ConnectionStringConnectInDBButton.IsEnabled = false;
+                ConnectionStringConnectInDBLabel.IsEnabled = false;
                 BlockSettings.Content = "Разблокировать настройки";
             }
             else
@@ -114,6 +115,7 @@ namespace TestCase_WPF_RSS
                 ConnectionStringCreateTablesButton.IsEnabled = true;
                 ConnectionStringCreateTablesLabel.IsEnabled = true;
                 ConnectionStringConnectInDBButton.IsEnabled = true;
+                ConnectionStringConnectInDBLabel.IsEnabled = true;
                 BlockSettings.Content = "Блокировать настройки на изменение";
             }
         }
