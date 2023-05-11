@@ -34,7 +34,7 @@ namespace TestCase_WPF_RSS
             MainWindow._MainWindow?.Close();
         }
 
-        ApplicationSettings appsets = new ApplicationSettings();
+        internal ApplicationSettings appsets = new ApplicationSettings();
         string? connectionString;
 
         // https://metanit.com/sharp/tutorial/16.2.php
