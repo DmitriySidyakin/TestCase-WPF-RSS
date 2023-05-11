@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCase-WPF-RSS", "TestCase-WPF-RSS\TestCase-WPF-RSS.csproj", "{85AD1EA7-6A11-4DB7-8F43-3DDB64A9B87D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85AD1EA7-6A11-4DB7-8F43-3DDB64A9B87D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85AD1EA7-6A11-4DB7-8F43-3DDB64A9B87D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85AD1EA7-6A11-4DB7-8F43-3DDB64A9B87D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85AD1EA7-6A11-4DB7-8F43-3DDB64A9B87D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {30749333-62EE-4C73-BD13-A270A0C0D4D1}
+	EndGlobalSection
+EndGlobal
