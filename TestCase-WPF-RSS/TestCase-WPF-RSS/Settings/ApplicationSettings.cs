@@ -3,41 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
 
-namespace TestCase_WPF_RSS
+namespace TestCase_WPF_RSS.Settings
 {
-    /// <summary>
-    /// Логика взаимодействия для ApplicationWindow.xaml
-    /// </summary>
-    public partial class ApplicationWindow : Window
+    internal class ApplicationSettings
     {
-        public ApplicationWindow()
+
+        public ApplicationSettings(string fileName)
         {
-            InitializeComponent();
+            FileName = fileName;
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        public ApplicationSettings() : this("..\\config\\config.xml") {}
+
+
+        public string FileName { get; set; }
+
+        DataBaseSettings? DataBaseSettings { get; set; }
+
+        public void LoadApplicationSettings()
         {
-            MainWindow._MainWindow?.Close();
+            CreateFieldsIfNoExists();
+            ParseXml();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private static void ParseXml()
         {
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load("config/config.xml");
             // получим корневой элемент
             XmlElement? xRoot = xDoc.DocumentElement;
             if (xRoot != null)
-            {
+            {/*
                 // обход всех узлов в корневом элементе
                 foreach (XmlElement xnode in xRoot)
                 {
@@ -59,6 +57,19 @@ namespace TestCase_WPF_RSS
                         }
                     }
                     Console.WriteLine();
+                }*/
+            }
+        }
+
+        private void CreateFieldsIfNoExists()
+        {
+            if (DataBaseSettings == null)
+            {
+                DataBaseSettings = new DataBaseSettings();
+
+                if (DataBaseSettings.ConnectionStringSettings != null)
+                {
+                    DataBaseSettings.ConnectionStringSettings = new ConnectionStringSettings();
                 }
             }
         }
