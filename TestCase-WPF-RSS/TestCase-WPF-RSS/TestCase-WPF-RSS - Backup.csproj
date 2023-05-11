@@ -17,11 +17,5 @@
   <ItemGroup>
     <Resource Include="logo.png" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <Content Include="config\config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
 </Project>
