@@ -23,10 +23,12 @@ namespace TestCase_WPF_RSS
     public partial class MainWindow : Window
     {
 
+        public static MainWindow? _MainWindow { get; set; } = null;
         private const int maxStackSize = 2 * 1024 * 1024;
         public MainWindow()
         {
             InitializeComponent();
+            _MainWindow = this;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

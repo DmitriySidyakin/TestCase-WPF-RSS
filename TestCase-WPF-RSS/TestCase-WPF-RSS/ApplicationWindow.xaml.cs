@@ -23,5 +23,10 @@ namespace TestCase_WPF_RSS
         {
             InitializeComponent();
         }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            MainWindow._MainWindow?.Close();
+        }
     }
 }

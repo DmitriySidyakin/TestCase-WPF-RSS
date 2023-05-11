@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCase_WPF_RSS"
         mc:Ignorable="d"
-        Title="ApplicationWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/logo.png">
+        Title="ApplicationWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/logo.png" Closed="Window_Closed">
     <Grid>
         
     </Grid>
