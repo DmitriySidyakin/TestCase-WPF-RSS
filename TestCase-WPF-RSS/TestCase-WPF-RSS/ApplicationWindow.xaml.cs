@@ -51,6 +51,7 @@ namespace TestCase_WPF_RSS
             {
                 appsets.DataBaseSettings.ConnectionStringSettings.ConnectionString = ConnectionString.Text;
                 appsets.SaveSettings();
+                connectionString = appsets.DataBaseSettings.ConnectionStringSettings.ConnectionString;
                 ResetBrush();
             } 
         }
@@ -72,6 +73,12 @@ namespace TestCase_WPF_RSS
             {
                 ResetBrush();
             }
+        }
+
+        private void ConnectionStringCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ConnectionString.Text = connectionString;
+            ResetBrush();
         }
     }
 }
