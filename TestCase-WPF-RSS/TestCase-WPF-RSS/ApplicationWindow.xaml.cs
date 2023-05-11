@@ -10,10 +10,12 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using TestCase_WPF_RSS.Settings;
+using static System.Net.Mime.MediaTypeNames;
 using Brushes = System.Windows.Media.Brushes;
 using Color = System.Drawing.Color;
 
@@ -84,28 +86,61 @@ namespace TestCase_WPF_RSS
             ResetBrush();
         }
 
-        #endregion
-
-        // Создание объектов
-
-        #region DB Object Creation
-
-
-
-        #endregion
-
         bool isSettingsLocked = false;
         private void BlockSettings_Click(object sender, RoutedEventArgs e)
         {
             isSettingsLocked = !isSettingsLocked;
             if (isSettingsLocked)
             {
-
+                ConnectionString.IsEnabled = false;
+                ConnectionStringLabel.IsEnabled = false;
+                ConnectionStringSaveButton.IsEnabled = false;
+                ConnectionStringCancel.IsEnabled = false;
+                ConnectionStringTestConnectionButton.IsEnabled = false;
+                ConnectionStringTestConnectionLabel.IsEnabled = false;
+                ConnectionStringCreateTablesButton.IsEnabled = false;
+                ConnectionStringCreateTablesLabel.IsEnabled = false;
+                ConnectionStringConnectInDBButton.IsEnabled = false;
+                BlockSettings.Content = "Разблокировать настройки";
             }
             else
             {
-
+                ConnectionString.IsEnabled = true;
+                ConnectionStringLabel.IsEnabled = true;
+                ConnectionStringSaveButton.IsEnabled = true;
+                ConnectionStringCancel.IsEnabled = true;
+                ConnectionStringTestConnectionButton.IsEnabled = true;
+                ConnectionStringTestConnectionLabel.IsEnabled = true;
+                ConnectionStringCreateTablesButton.IsEnabled = true;
+                ConnectionStringCreateTablesLabel.IsEnabled = true;
+                ConnectionStringConnectInDBButton.IsEnabled = true;
+                BlockSettings.Content = "Блокировать настройки на изменение";
             }
         }
+
+        #endregion
+
+        // Создание объектов
+
+        #region DB Object Creation
+
+        private void ConnectionStringTestConnectionButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConnectionStringCreateTablesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ConnectionStringConnectInDBButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
+
+
     }
 }

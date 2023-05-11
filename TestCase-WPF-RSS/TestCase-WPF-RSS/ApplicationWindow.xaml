@@ -9,16 +9,17 @@
     <Grid>
         <TabControl>
             <TabItem Header="Настройки">
-                <Grid Background="#FFE5E5E5">
+                <Grid x:Name="SettingsGrid" Background="#FFE5E5E5">
                     <TextBox x:Name="ConnectionString" Margin="10,36,10,0" TextWrapping="Wrap" Text="Database Connection..." VerticalAlignment="Top" Height="138" KeyUp="ConnectionString_KeyUp"/>
                     <Label x:Name="ConnectionStringLabel" Content="Строка подключения к БД" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
                     <Button x:Name="ConnectionStringSaveButton" Content="Сохранить и применить" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.252,-0.447" Click="ConnectionStringSaveButton_Click"/>
                     <Button x:Name="ConnectionStringCancel" Content="Отменить" HorizontalAlignment="Left" Margin="151,179,0,0" VerticalAlignment="Top" Click="ConnectionStringCancel_Click"/>
-                    <Button x:Name="ConnectionStringTestConnectionButton" Content="Проверить соединение" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,1.257"/>
+                    <Button x:Name="ConnectionStringTestConnectionButton" Content="Проверить соединение" HorizontalAlignment="Left" Margin="10,214,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.429,1.257" Click="ConnectionStringTestConnectionButton_Click"/>
                     <Label x:Name="ConnectionStringTestConnectionLabel" Content="Нажмите проверить соединение, чтобы проверить соединение с БД..." HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="ConnectionStringCreateTablesButton" Content="Создать таблицы" HorizontalAlignment="Left" Margin="151,214,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="ConnectionStringCreateTablesButton" Content="Создать таблицы" HorizontalAlignment="Left" Margin="151,214,0,0" VerticalAlignment="Top" Click="ConnectionStringCreateTablesButton_Click"/>
                     <Label x:Name="ConnectionStringCreateTablesLabel" Content="Нажмите создать таблицы, после проверки соединения, чтобы создать начальную структуру БД..." HorizontalAlignment="Left" Margin="10,265,0,0" VerticalAlignment="Top"/>
-                    <Button x:Name="BlockSettings" Content="Блокировать настройки на изменение" Margin="0,3,12,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="215"/>
+                    <Button x:Name="BlockSettings" Content="Блокировать настройки на изменение" Margin="0,3,12,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="215" Click="BlockSettings_Click"/>
+                    <Button x:Name="ConnectionStringConnectInDBButton" Content="Подключиться к БД" HorizontalAlignment="Left" Margin="254,214,0,0" VerticalAlignment="Top" Click="ConnectionStringConnectInDBButton_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Создать Объект">
