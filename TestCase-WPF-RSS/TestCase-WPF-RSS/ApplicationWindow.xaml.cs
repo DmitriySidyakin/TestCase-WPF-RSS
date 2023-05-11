@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using TestCase_WPF_RSS.Settings;
+using Brushes = System.Windows.Media.Brushes;
+using Color = System.Drawing.Color;
 
 namespace TestCase_WPF_RSS
 {
@@ -32,12 +35,14 @@ namespace TestCase_WPF_RSS
         }
 
         ApplicationSettings appsets = new ApplicationSettings();
+        string? connectionString;
 
         // https://metanit.com/sharp/tutorial/16.2.php
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             appsets.LoadApplicationSettings();
             ConnectionString.Text = appsets.DataBaseSettings?.ConnectionStringSettings?.ConnectionString;
+            connectionString = ConnectionString.Text;
         }
 
         private void ConnectionStringSaveButton_Click(object sender, RoutedEventArgs e)
@@ -46,7 +51,27 @@ namespace TestCase_WPF_RSS
             {
                 appsets.DataBaseSettings.ConnectionStringSettings.ConnectionString = ConnectionString.Text;
                 appsets.SaveSettings();
+                ResetBrush();
             } 
+        }
+
+        private void ResetBrush()
+        {
+            var converter = new System.Windows.Media.BrushConverter();
+            var brush = (System.Windows.Media.Brush?)converter.ConvertFromString("#FFDDDDDD");
+            ConnectionStringSaveButton.Background = brush;
+        }
+
+        private void ConnectionString_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (ConnectionString.Text != connectionString)
+            {
+                ConnectionStringSaveButton.Background = Brushes.LightGreen;
+            }
+            else
+            {
+                ResetBrush();
+            }
         }
     }
 }
