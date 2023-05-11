@@ -34,6 +34,9 @@ namespace TestCase_WPF_RSS
             MainWindow._MainWindow?.Close();
         }
 
+        // Настройки строки подключения к БД
+        #region Application Settings
+
         internal ApplicationSettings appsets = new ApplicationSettings();
         string? connectionString;
 
@@ -80,5 +83,9 @@ namespace TestCase_WPF_RSS
             ConnectionString.Text = connectionString;
             ResetBrush();
         }
+
+        #endregion
+
+        // Создание объектов
     }
 }
