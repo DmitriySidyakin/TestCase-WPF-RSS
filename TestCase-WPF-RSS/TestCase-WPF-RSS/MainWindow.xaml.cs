@@ -22,6 +22,8 @@ namespace TestCase_WPF_RSS
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private const int maxStackSize = 2 * 1024 * 1024;
         public MainWindow()
         {
             InitializeComponent();
@@ -34,8 +36,20 @@ namespace TestCase_WPF_RSS
             textAnimation.From = width;
             textAnimation.To = 200;
             textAnimation.Duration = TimeSpan.FromSeconds(3);
-            textAnimation.RepeatBehavior = new RepeatBehavior(64000);
-            LoadingText.BeginAnimation(Label.WidthProperty, textAnimation);
+            textAnimation.RepeatBehavior = new RepeatBehavior(2);
+
+            textAnimation.Completed += (sender, eArgs) =>
+            {
+                ShowApplicationWindow();
+                this.Hide();
+            };
+            LoadingText.BeginAnimation(Label.WidthProperty, textAnimation, HandoffBehavior.Compose);
+        }
+
+        private void ShowApplicationWindow()
+        {
+            ApplicationWindow applicationWindow = new ApplicationWindow();
+            applicationWindow.Show();
         }
     }
 }
