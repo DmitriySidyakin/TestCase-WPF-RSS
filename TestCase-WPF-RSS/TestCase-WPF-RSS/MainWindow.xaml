@@ -9,7 +9,7 @@
     <Grid x:Name="MainGrid" Background="White">
         <Rectangle HorizontalAlignment="Center" Height="350" Stroke="Blue" VerticalAlignment="Center" Width="640"/>
         <Label x:Name="LoadingText" Content="Загрузка..." VerticalAlignment="Center" Foreground="#FF1578AB" FontSize="48" HorizontalAlignment="Center" Width="232"/>
-        <Label Content="Тестовое задание Дмитрия Сидякина" HorizontalAlignment="Left" Margin="35,50,0,0" VerticalAlignment="Top"/>
+        <Label Content="Тестовое задание Дмитрия Сидякина" HorizontalAlignment="Left" Foreground="#FF1578AB" Margin="35,50,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
