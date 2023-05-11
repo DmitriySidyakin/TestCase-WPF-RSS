@@ -87,5 +87,25 @@ namespace TestCase_WPF_RSS
         #endregion
 
         // Создание объектов
+
+        #region DB Object Creation
+
+
+
+        #endregion
+
+        bool isSettingsLocked = false;
+        private void BlockSettings_Click(object sender, RoutedEventArgs e)
+        {
+            isSettingsLocked = !isSettingsLocked;
+            if (isSettingsLocked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
     }
 }
