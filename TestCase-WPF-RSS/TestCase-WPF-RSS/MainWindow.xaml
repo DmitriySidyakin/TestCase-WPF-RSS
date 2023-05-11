@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCase_WPF_RSS"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="370" Width="660" WindowStyle="None" Topmost="True" ResizeMode="NoResize" HorizontalAlignment="Center" VerticalAlignment="Center" Background="White" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+    <Grid x:Name="MainGrid" Background="White">
+        <Rectangle HorizontalAlignment="Center" Height="350" Stroke="Blue" VerticalAlignment="Center" Width="640"/>
+        <Label x:Name="LoadingText" Content="Загрузка..." VerticalAlignment="Center" Foreground="#FF1578AB" FontSize="48" HorizontalAlignment="Center" Width="232"/>
+        <Label Content="Тестовое задание Дмитрия Сидякина" HorizontalAlignment="Left" Margin="35,50,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
