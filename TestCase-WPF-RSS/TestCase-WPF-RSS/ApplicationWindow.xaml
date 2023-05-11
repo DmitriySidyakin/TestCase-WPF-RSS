@@ -5,9 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCase_WPF_RSS"
         mc:Ignorable="d"
-        Title="ApplicationWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/logo.png" Closed="Window_Closed">
+        Title="ApplicationWindow" Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Icon="/logo.png" Closed="Window_Closed">
     <Grid>
         <TabControl>
+            <TabItem Header="Настройки">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox Margin="10,36,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Height="138"/>
+                    <Label Content="Строка подключения к БД" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <Button Content="Сохранить и применить" HorizontalAlignment="Left" Margin="10,179,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.252,-0.447"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
             <TabItem Header="TabItem">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
