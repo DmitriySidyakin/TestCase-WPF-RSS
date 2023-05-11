@@ -140,7 +140,7 @@ namespace TestCase_WPF_RSS
 
         private void ConnectionStringConnectInDBButton_Click(object sender, RoutedEventArgs e)
         {
-
+            CreateObjectTab.IsEnabled = true;
         }
 
         #endregion
