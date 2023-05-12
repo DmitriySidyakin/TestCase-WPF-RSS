@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
+using TestCase_WPF_RSS.EntityFramework;
 using TestCase_WPF_RSS.Settings;
 using static System.Net.Mime.MediaTypeNames;
 using Brushes = System.Windows.Media.Brushes;
@@ -130,7 +131,19 @@ namespace TestCase_WPF_RSS
 
         private void ConnectionStringTestConnectionButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(connectionString is not null) 
+                if (ApplicationContext.TestConnection(connectionString))
+                {
+                    MessageBox.Show("Соединение удалось установить!");
+                }
+                else
+                {
+                    MessageBox.Show("Соединение НЕ удалось установить!");
+                }
+            else
+            {
+                MessageBox.Show("Соединение НЕ удалось установить!");
+            }
         }
 
         private void ConnectionStringCreateTablesButton_Click(object sender, RoutedEventArgs e)
