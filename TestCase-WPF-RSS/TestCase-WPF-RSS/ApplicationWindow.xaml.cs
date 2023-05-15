@@ -123,7 +123,6 @@ namespace TestCase_WPF_RSS
         #endregion
 
         // Создание объектов
-
         #region DB Object Creation
 
         private void ConnectionStringTestConnectionButton_Click(object sender, RoutedEventArgs e)
@@ -147,10 +146,10 @@ namespace TestCase_WPF_RSS
             }
         }
 
-
         #endregion
 
-        #region Received Tab
+        // Вкладки принят, на склад, продан
+        #region Received, ToWarehouse, Sold Tabs
 
         public void FillDataGrid()
 
@@ -275,9 +274,12 @@ namespace TestCase_WPF_RSS
                 {
                     FillDataGrid_Sold();
                 }
+                else if (e.Source is not null && ((TabControl)e.Source).SelectedIndex == 4)
+                {
+                    BuildReport();
+                }
             }
         }
-
         private void ReceivedGrid_DataGrid_ContextMenu_ToWarehouse_Click(object sender, RoutedEventArgs e)
         {
             var selectedIndex = ReceivedGrid_DataGrid.SelectedIndex;
@@ -340,6 +342,15 @@ namespace TestCase_WPF_RSS
             {
                 MessageBox.Show("Сначала выберите строку данных...");
             }
+        }
+
+        #endregion
+
+        #region Report
+
+        private void BuildReport()
+        {
+            //throw new NotImplementedException();
         }
 
         #endregion

@@ -49,8 +49,19 @@
                     <DataGrid x:Name="SoldGrid_DataGrid" Margin="0,49,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Отчёт" IsEnabled="True">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="Report_DataGrid" Margin="0,104,0,29"/>
+                    <Label Content="Товаров: " HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top"/>
+                    <Label Name="GoodsCount" Content="0" Margin="67,382,10,0" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <GroupBox HorizontalAlignment="Center" Height="89" Header="Фильтр" Margin="0,10,0,0" VerticalAlignment="Top" Width="774">
+                        <Grid>
+                            <Label Content="Статус:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30"/>
+                            <Label Content="Дата модификации:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="0,30,0,0"/>
+                        </Grid>
+
+                    </GroupBox>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem" IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
