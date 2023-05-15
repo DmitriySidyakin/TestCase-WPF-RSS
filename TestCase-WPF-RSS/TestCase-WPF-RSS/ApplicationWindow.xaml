@@ -62,10 +62,10 @@
                             <DatePicker Name="DatePickerFrom"  HorizontalAlignment="Left" Margin="133,30,0,0" VerticalAlignment="Top"/>
                             <Label Content="по" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="238,30,0,0"/>
                             <DatePicker Name="DatePickerTo" HorizontalAlignment="Left" Margin="267,30,0,0" VerticalAlignment="Top"/>
-                            <CheckBox Content="Принят" HorizontalAlignment="Left" Margin="52,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <CheckBox Content="На склад" HorizontalAlignment="Left" Margin="117,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <CheckBox Content="Продан" HorizontalAlignment="Left" Margin="190,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <Button Content="Применить фильтр" Margin="372,6,-84,0" Height="50" VerticalAlignment="Top"/>
+                            <CheckBox Name="Received_CheckBox" Content="Принят" HorizontalAlignment="Left" Margin="52,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <CheckBox Name="ToWarehouse_CheckBox" Content="На склад" HorizontalAlignment="Left" Margin="117,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <CheckBox Name="Sold_CheckBox" Content="Продан" HorizontalAlignment="Left" Margin="190,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <Button Name="ApplyFilter" Content="Применить фильтр" Margin="372,6,-84,0" Height="50" VerticalAlignment="Top" Click="Button_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
