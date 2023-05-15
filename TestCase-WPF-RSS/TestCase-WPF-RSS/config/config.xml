@@ -2,8 +2,8 @@
 <Settings>
   <Application>
     <Database>
-      <Connection>Введите строку подключения к базе данных. Напимер: 
-      фыв</Connection>
+      <Connection>Введите строку подключения к базе данных. Напимер:
+        Data Source=.;Initial Catalog=rss;Integrated Security=True;TrustServerCertificate=true;</Connection>
     </Database>
   </Application>
 </Settings>

@@ -99,12 +99,9 @@ namespace TestCase_WPF_RSS
                 ConnectionStringCancel.IsEnabled = false;
                 ConnectionStringTestConnectionButton.IsEnabled = false;
                 ConnectionStringTestConnectionLabel.IsEnabled = false;
-                ConnectionStringCreateTablesButton.IsEnabled = false;
-                ConnectionStringCreateTablesLabel.IsEnabled = false;
-                ConnectionStringConnectInDBButton.IsEnabled = false;
-                ConnectionStringConnectInDBLabel.IsEnabled = false;
                 ConnectionStringTestGroupBox.IsEnabled = false;
                 BlockSettings.Content = "Разблокировать настройки";
+                CreateObjectTab.IsEnabled = true;
             }
             else
             {
@@ -114,12 +111,9 @@ namespace TestCase_WPF_RSS
                 ConnectionStringCancel.IsEnabled = true;
                 ConnectionStringTestConnectionButton.IsEnabled = true;
                 ConnectionStringTestConnectionLabel.IsEnabled = true;
-                ConnectionStringCreateTablesButton.IsEnabled = true;
-                ConnectionStringCreateTablesLabel.IsEnabled = true;
-                ConnectionStringConnectInDBButton.IsEnabled = true;
-                ConnectionStringConnectInDBLabel.IsEnabled = true;
                 ConnectionStringTestGroupBox.IsEnabled = true;
                 BlockSettings.Content = "Блокировать настройки на изменение";
+                CreateObjectTab.IsEnabled = false;
             }
         }
 
@@ -131,8 +125,10 @@ namespace TestCase_WPF_RSS
 
         private void ConnectionStringTestConnectionButton_Click(object sender, RoutedEventArgs e)
         {
-            if(connectionString is not null) 
-                if (ApplicationContext.TestConnection(connectionString))
+            if(connectionString is not null)
+            {
+                ApplicationContext actxt = new ApplicationContext(connectionString);
+                if (actxt.TestConnection(connectionString))
                 {
                     MessageBox.Show("Соединение удалось установить!");
                 }
@@ -140,20 +136,12 @@ namespace TestCase_WPF_RSS
                 {
                     MessageBox.Show("Соединение НЕ удалось установить!");
                 }
+            }
+
             else
             {
                 MessageBox.Show("Соединение НЕ удалось установить!");
             }
-        }
-
-        private void ConnectionStringCreateTablesButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ConnectionStringConnectInDBButton_Click(object sender, RoutedEventArgs e)
-        {
-            CreateObjectTab.IsEnabled = true;
         }
 
         #endregion

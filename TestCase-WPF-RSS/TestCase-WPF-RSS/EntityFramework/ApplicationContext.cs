@@ -10,18 +10,23 @@ namespace TestCase_WPF_RSS.EntityFramework
     {
 
         public DbSet<DatabaseConfiguration> DatabaseConfiguration { get; set; } = null!;
-        public string connectionString;
+        public DbSet<Shipments> Shipments { get; set; } = null!;
+
+        public string СonnectionString;
 
         public ApplicationContext(string connectionString)
         {
-            this.connectionString = connectionString;   // получаем извне строку подключения
+            this.СonnectionString = connectionString;   // получаем извне строку подключения
+
             Database.EnsureCreated();
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(СonnectionString);
         }
 
-        static public bool TestConnection(string connectionString)
+        public bool TestConnection(string connectionString)
         {
             bool result = false;
 
@@ -31,10 +36,14 @@ namespace TestCase_WPF_RSS.EntityFramework
                 {
                     var dbcnf = db.DatabaseConfiguration.ToList();
                     int count = dbcnf.Count;
+
                     if (count == 0)
                     {
                         db.DatabaseConfiguration.Add(new EntityFramework.DatabaseConfiguration() { Created = DateTimeOffset.Now });
+                        db.SaveChanges();
                     }
+
+                    result = true;
                 }
             }
             catch (Exception ex) { }
@@ -51,5 +60,28 @@ namespace TestCase_WPF_RSS.EntityFramework
 
         public DateTimeOffset Created { get; set; }
 
+    }
+
+    /// <summary>
+    /// Товары
+    /// </summary>
+    public class Shipments
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public ShipmentStatus Status { get; set; }
+    }
+
+    public enum ShipmentStatus
+    {
+        // Принят
+        Received = 0,
+
+        // На склад
+        ToWarehouse = 1,
+
+        // Продан
+        Sold = 2
     }
 }
