@@ -33,7 +33,7 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="ToWarehouseTabItem" Header="Склад" IsEnabled="True">
+            <TabItem x:Name="ToWarehouseTabItem" Header="На склад" IsEnabled="True">
                 <Grid x:Name="ToWarehouseGrid" Background="#FFE5E5E5">
                     <DataGrid x:Name="ToWarehouseGrid_DataGrid" Margin="0,49,0,0">
                         <DataGrid.ContextMenu>
@@ -52,19 +52,23 @@
             <TabItem Header="Отчёт" IsEnabled="True">
                 <Grid Background="#FFE5E5E5">
                     <DataGrid x:Name="Report_DataGrid" Margin="0,104,0,29"/>
-                    <Label Content="Товаров: " HorizontalAlignment="Left" Margin="10,382,0,0" VerticalAlignment="Top"/>
-                    <Label Name="GoodsCount" Content="0" Margin="67,382,10,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <GroupBox HorizontalAlignment="Center" Height="89" Header="Фильтр" Margin="0,10,0,0" VerticalAlignment="Top" Width="774">
-                        <Grid>
+                    <Label Content="Товаров: " HorizontalAlignment="Left" Margin="10,0,0,0" Height="24" VerticalAlignment="Bottom"/>
+                    <Label Name="GoodsCount" Content="0" Margin="67,0,10,0" FontWeight="Bold" Height="24" VerticalAlignment="Bottom"/>
+                    <GroupBox HorizontalAlignment="Center" Height="89" Header="Фильтр" Margin="0,10,0,0" VerticalAlignment="Top" Width="510">
+                        <Grid Margin="0,0,93,0">
                             <Label Content="Статус:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30"/>
-                            <Label Content="Дата модификации:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="0,30,0,0"/>
-                        </Grid>
 
+                            <Label Content="Дата модификации: с" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="0,30,0,0"/>
+                            <DatePicker Name="DatePickerFrom"  HorizontalAlignment="Left" Margin="133,30,0,0" VerticalAlignment="Top"/>
+                            <Label Content="по" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Margin="238,30,0,0"/>
+                            <DatePicker Name="DatePickerTo" HorizontalAlignment="Left" Margin="267,30,0,0" VerticalAlignment="Top"/>
+                            <CheckBox Content="Принят" HorizontalAlignment="Left" Margin="52,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <CheckBox Content="На склад" HorizontalAlignment="Left" Margin="117,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <CheckBox Content="Продан" HorizontalAlignment="Left" Margin="190,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
+                            <Button Content="Применить фильтр" Margin="372,6,-84,0" Height="50" VerticalAlignment="Top"/>
+                        </Grid>
                     </GroupBox>
                 </Grid>
-            </TabItem>
-            <TabItem Header="TabItem" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
 
