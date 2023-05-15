@@ -11,6 +11,7 @@ namespace TestCase_WPF_RSS.EntityFramework
 
         public DbSet<DatabaseConfiguration> DatabaseConfiguration { get; set; } = null!;
         public DbSet<Shipments> Shipments { get; set; } = null!;
+        public DbSet<ShipmentStatus> ShipmentStatuses { get; set; } = null!;
 
         public string СonnectionString;
 
@@ -43,10 +44,21 @@ namespace TestCase_WPF_RSS.EntityFramework
                         db.SaveChanges();
                     }
 
+                    var dbsts = db.ShipmentStatuses.ToList();
+                    count = dbcnf.Count;
+
+                    if (count == 0)
+                    {
+                        db.ShipmentStatuses.Add(new ShipmentStatus() { StatusId = ShipmentStatusEnum.Received, StatusText = "Принят" });
+                        db.ShipmentStatuses.Add(new ShipmentStatus() { StatusId = ShipmentStatusEnum.ToWarehouse, StatusText = "На склад" });
+                        db.ShipmentStatuses.Add(new ShipmentStatus() { StatusId = ShipmentStatusEnum.Sold, StatusText = "Продан" });
+                        db.SaveChanges();
+                    } 
+
                     result = true;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception) { }
 
 
             return result;
@@ -70,10 +82,10 @@ namespace TestCase_WPF_RSS.EntityFramework
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public ShipmentStatus Status { get; set; }
+        public ShipmentStatusEnum Status { get; set; }
     }
 
-    public enum ShipmentStatus
+    public enum ShipmentStatusEnum
     {
         // Принят
         Received = 0,
@@ -83,5 +95,15 @@ namespace TestCase_WPF_RSS.EntityFramework
 
         // Продан
         Sold = 2
+    }
+
+    public class ShipmentStatus
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public ShipmentStatusEnum StatusId { get; set; }
+
+        public string StatusText { get; set; }
     }
 }

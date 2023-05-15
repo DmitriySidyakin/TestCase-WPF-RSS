@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -101,7 +103,7 @@ namespace TestCase_WPF_RSS
                 ConnectionStringTestConnectionLabel.IsEnabled = false;
                 ConnectionStringTestGroupBox.IsEnabled = false;
                 BlockSettings.Content = "Разблокировать настройки";
-                CreateObjectTab.IsEnabled = true;
+                //CreateObjectTab.IsEnabled = true;
             }
             else
             {
@@ -113,7 +115,7 @@ namespace TestCase_WPF_RSS
                 ConnectionStringTestConnectionLabel.IsEnabled = true;
                 ConnectionStringTestGroupBox.IsEnabled = true;
                 BlockSettings.Content = "Блокировать настройки на изменение";
-                CreateObjectTab.IsEnabled = false;
+                //CreateObjectTab.IsEnabled = false;
             }
         }
 
@@ -144,8 +146,61 @@ namespace TestCase_WPF_RSS
             }
         }
 
+
         #endregion
 
+        #region Received Tab
+        /*
+        private void TabItem_Received_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            FillDataGrid();
+        }*/
+
+        private void FillDataGrid()
+
+        {
+
+            string conString = connectionString??"";
+
+            string cmdString = string.Empty;
+
+            using (SqlConnection con = new SqlConnection(conString))
+
+            {
+
+                cmdString = "SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса' FROM Shipments as S LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId";
+
+                SqlCommand cmd = new SqlCommand(cmdString, con);
+
+                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+
+                DataTable dt = new DataTable("Shipments");
+
+                sda.Fill(dt);
+
+                ReceivedGrid_DataGrid.ItemsSource = dt.AsDataView();
+            }
+
+        }
+
+        private void CreateShipmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window_CreateShipment window_CreateShipment = new Window_CreateShipment();
+            window_CreateShipment.Show();
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.Source is TabControl)
+            {
+                if (e.Source is not null && ((TabControl)e.Source).SelectedIndex == 1)
+                {
+                    FillDataGrid();
+                }
+            }
+        }
+
+        #endregion
 
     }
 }

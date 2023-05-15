@@ -11,6 +11,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="EntityFramework\ApplicationContext.cs~RFa0312ca.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="img\logo.ico" />
   </ItemGroup>
 
