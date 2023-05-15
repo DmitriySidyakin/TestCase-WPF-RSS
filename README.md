@@ -34,3 +34,7 @@
  2. **Visual Studio 2022 Community** (последняя версия)
  3. **Microsoft SQL Server 2019**
  4. **SQL Server Management Studio 19**
+
+## Инструкция
+
+Инструкция по учтановке : [docs/instruction/README.md](docs/instruction/README.md)
