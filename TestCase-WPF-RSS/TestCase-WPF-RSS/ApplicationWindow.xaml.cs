@@ -278,6 +278,68 @@ namespace TestCase_WPF_RSS
             }
         }
 
+        private void ReceivedGrid_DataGrid_ContextMenu_ToWarehouse_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = ReceivedGrid_DataGrid.SelectedIndex;
+            System.Data.DataRowView shipment = (System.Data.DataRowView)ReceivedGrid_DataGrid.SelectedItem;
+            if (selectedIndex >= 0)
+            {
+                if (shipment != null)
+                {
+                    var selectedId = (int)shipment.Row[0];
+
+                    try
+                    {
+                        using (ApplicationContext db = new ApplicationContext(connectionString ?? ""))
+                        {
+                            var s = db.Shipments.FirstOrDefault(x => x.Id == selectedId);
+                            s.Status = ShipmentStatusEnum.ToWarehouse;
+                            db.Shipments.Update(s);
+                            db.SaveChanges();
+                        }
+                    }
+                    catch (Exception) { MessageBox.Show("Нет соединения с БД!"); }
+
+                    FillDataGrid();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите строку данных...");
+            }
+        }
+
+        private void ToWarehouseGrid_DataGrid_ContextMenu_ToWarehouse_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = ToWarehouseGrid_DataGrid.SelectedIndex;
+            System.Data.DataRowView shipment = (System.Data.DataRowView)ToWarehouseGrid_DataGrid.SelectedItem;
+            if (selectedIndex >= 0)
+            {
+                if (shipment != null)
+                {
+                    var selectedId = (int)shipment.Row[0];
+
+                    try
+                    {
+                        using (ApplicationContext db = new ApplicationContext(connectionString ?? ""))
+                        {
+                            var s = db.Shipments.FirstOrDefault(x => x.Id == selectedId);
+                            s.Status = ShipmentStatusEnum.Sold;
+                            db.Shipments.Update(s);
+                            db.SaveChanges();
+                        }
+                    }
+                    catch (Exception) { MessageBox.Show("Нет соединения с БД!"); }
+
+                    FillDataGrid_ToWarehouse();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите строку данных...");
+            }
+        }
+
         #endregion
 
     }

@@ -24,12 +24,24 @@
             <TabItem x:Name="ReceivedTabItem" Header="Принят" IsEnabled="True" >
                 <Grid x:Name="ReceivedGrid" Background="#FFE5E5E5">
                     <Button x:Name="CreateShipmentButton"  Content="Создать" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.126,0.204" Click="CreateShipmentButton_Click"/>
-                    <DataGrid x:Name="ReceivedGrid_DataGrid" Margin="0,49,0,0"/>
+                    <DataGrid x:Name="ReceivedGrid_DataGrid" Margin="0,49,0,0">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu Name="ReceivedGrid_DataGrid_ContextMenu">
+                                <MenuItem Name="ReceivedGrid_DataGrid_ContextMenu_ToWarehouse" Header="На склад" Click="ReceivedGrid_DataGrid_ContextMenu_ToWarehouse_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="ToWarehouseTabItem" Header="Склад" IsEnabled="True">
                 <Grid x:Name="ToWarehouseGrid" Background="#FFE5E5E5">
-                    <DataGrid x:Name="ToWarehouseGrid_DataGrid" Margin="0,49,0,0"/>
+                    <DataGrid x:Name="ToWarehouseGrid_DataGrid" Margin="0,49,0,0">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu Name="ToWarehouseGrid_DataGrid_ContextMenu">
+                                <MenuItem Name="ToWarehouseGrid_DataGrid_ContextMenu_ToWarehouse" Header="Продан" Click="ToWarehouseGrid_DataGrid_ContextMenu_ToWarehouse_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="SoldTabItem" Header="Продан" IsEnabled="True">
