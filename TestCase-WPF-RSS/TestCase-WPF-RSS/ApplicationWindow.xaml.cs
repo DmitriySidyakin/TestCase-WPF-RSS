@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -43,7 +44,7 @@ namespace TestCase_WPF_RSS
         #region Application Settings
 
         internal ApplicationSettings appsets = new ApplicationSettings();
-        string? connectionString;
+        public string? connectionString;
 
         // https://metanit.com/sharp/tutorial/16.2.php
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -55,13 +56,13 @@ namespace TestCase_WPF_RSS
 
         private void ConnectionStringSaveButton_Click(object sender, RoutedEventArgs e)
         {
-            if(appsets.DataBaseSettings != null && appsets.DataBaseSettings.ConnectionStringSettings != null)
+            if (appsets.DataBaseSettings != null && appsets.DataBaseSettings.ConnectionStringSettings != null)
             {
                 appsets.DataBaseSettings.ConnectionStringSettings.ConnectionString = ConnectionString.Text;
                 appsets.SaveSettings();
                 connectionString = appsets.DataBaseSettings.ConnectionStringSettings.ConnectionString;
                 ResetBrush();
-            } 
+            }
         }
 
         private void ResetBrush()
@@ -127,7 +128,7 @@ namespace TestCase_WPF_RSS
 
         private void ConnectionStringTestConnectionButton_Click(object sender, RoutedEventArgs e)
         {
-            if(connectionString is not null)
+            if (connectionString is not null)
             {
                 ApplicationContext actxt = new ApplicationContext(connectionString);
                 if (actxt.TestConnection(connectionString))
@@ -150,42 +151,111 @@ namespace TestCase_WPF_RSS
         #endregion
 
         #region Received Tab
-        /*
-        private void TabItem_Received_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            FillDataGrid();
-        }*/
 
-        private void FillDataGrid()
+        public void FillDataGrid()
 
         {
 
-            string conString = connectionString??"";
+            string conString = connectionString ?? "";
 
             string cmdString = string.Empty;
 
-            using (SqlConnection con = new SqlConnection(conString))
-
+            try
             {
+                using (SqlConnection con = new SqlConnection(conString))
 
-                cmdString = "SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса' FROM Shipments as S LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId";
+                {
 
-                SqlCommand cmd = new SqlCommand(cmdString, con);
+                    cmdString = "SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса' FROM Shipments as S LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId WHERE S.Status = 0";
 
-                SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    SqlCommand cmd = new SqlCommand(cmdString, con);
 
-                DataTable dt = new DataTable("Shipments");
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
 
-                sda.Fill(dt);
+                    DataTable dt = new DataTable("Shipments");
 
-                ReceivedGrid_DataGrid.ItemsSource = dt.AsDataView();
+                    sda.Fill(dt);
+
+                    ReceivedGrid_DataGrid.ItemsSource = dt.AsDataView();
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось подключиться к БД!");
+            }
+        }
 
+        public void FillDataGrid_ToWarehouse()
+
+        {
+
+            string conString = connectionString ?? "";
+
+            string cmdString = string.Empty;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conString))
+
+                {
+
+                    cmdString = "SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса' FROM Shipments as S LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId WHERE S.Status = 1";
+
+                    SqlCommand cmd = new SqlCommand(cmdString, con);
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+
+                    DataTable dt = new DataTable("Shipments");
+
+                    sda.Fill(dt);
+
+                    ToWarehouseGrid_DataGrid.ItemsSource = dt.AsDataView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось подключиться к БД!");
+            }
+        }
+
+        public void FillDataGrid_Sold()
+
+        {
+
+            string conString = connectionString ?? "";
+
+            string cmdString = string.Empty;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conString))
+
+                {
+
+                    cmdString = "SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса' FROM Shipments as S LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId WHERE S.Status = 2";
+
+                    SqlCommand cmd = new SqlCommand(cmdString, con);
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+
+                    DataTable dt = new DataTable("Shipments");
+
+                    sda.Fill(dt);
+
+                    SoldGrid_DataGrid.ItemsSource = dt.AsDataView();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось подключиться к БД!");
+            }
         }
 
         private void CreateShipmentButton_Click(object sender, RoutedEventArgs e)
         {
             Window_CreateShipment window_CreateShipment = new Window_CreateShipment();
+            window_CreateShipment.connectionString = connectionString;
+            window_CreateShipment.applicationWindow = this;
             window_CreateShipment.Show();
         }
 
@@ -196,6 +266,14 @@ namespace TestCase_WPF_RSS
                 if (e.Source is not null && ((TabControl)e.Source).SelectedIndex == 1)
                 {
                     FillDataGrid();
+                }
+                else if (e.Source is not null && ((TabControl)e.Source).SelectedIndex == 2)
+                {
+                    FillDataGrid_ToWarehouse();
+                }
+                else if (e.Source is not null && ((TabControl)e.Source).SelectedIndex == 3)
+                {
+                    FillDataGrid_Sold();
                 }
             }
         }

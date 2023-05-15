@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestCase_WPF_RSS"
         mc:Ignorable="d"
-        Title="Создать Товар"  Height="450" Width="800" MinHeight="450" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Normal" Icon="/logo.png">
+        Title="Создать Товар"  Height="125" Width="240" MinHeight="0" MinWidth="0" WindowStartupLocation="CenterScreen" WindowState="Normal" Icon="/logo.png">
     <Grid>
-        <Label Content="Статус" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Margin="60,12,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem x:Name="Received_ComboBoxItem" Content="Принят"/>
+        <Label Content="Статус" Margin="10,10,10,10"/>
+        <ComboBox Name="StatusComboBox" HorizontalAlignment="Left" Margin="60,12,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem x:Name="Received_ComboBoxItem" Content="Принят" IsSelected="True"/>
             <ComboBoxItem x:Name="ToWarehouse_ComboBoxItem" Content="На склад"/>
             <ComboBoxItem x:Name="Sold_ComboBoxItem" Content="Продан"/>
         </ComboBox>
+        <Button Height="24" VerticalAlignment="Top" HorizontalAlignment="Center" Width="180" Margin="0,55,0,0" Content="Создать" Click="Button_Click">
+        </Button>
     </Grid>
 </Window>

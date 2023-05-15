@@ -25,10 +25,12 @@ namespace TestCase_WPF_RSS
 
         public static MainWindow? _MainWindow { get; set; } = null;
         private const int maxStackSize = 2 * 1024 * 1024;
+        public static ApplicationWindow? applicationWindow { get; set; } = null;
         public MainWindow()
         {
             InitializeComponent();
             _MainWindow = this;
+            applicationWindow = new ApplicationWindow();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -50,8 +52,7 @@ namespace TestCase_WPF_RSS
 
         private void ShowApplicationWindow()
         {
-            ApplicationWindow applicationWindow = new ApplicationWindow();
-            applicationWindow.Show();
+            applicationWindow?.Show();
         }
     }
 }

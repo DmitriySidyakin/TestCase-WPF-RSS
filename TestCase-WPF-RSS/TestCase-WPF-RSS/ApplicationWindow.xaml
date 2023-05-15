@@ -27,11 +27,15 @@
                     <DataGrid x:Name="ReceivedGrid_DataGrid" Margin="0,49,0,0"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Склад" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem x:Name="ToWarehouseTabItem" Header="Склад" IsEnabled="True">
+                <Grid x:Name="ToWarehouseGrid" Background="#FFE5E5E5">
+                    <DataGrid x:Name="ToWarehouseGrid_DataGrid" Margin="0,49,0,0"/>
+                </Grid>
             </TabItem>
-            <TabItem Header="Продан" IsEnabled="False">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem x:Name="SoldTabItem" Header="Продан" IsEnabled="True">
+                <Grid x:Name="SoldGrid" Background="#FFE5E5E5">
+                    <DataGrid x:Name="SoldGrid_DataGrid" Margin="0,49,0,0"/>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem" IsEnabled="False">
                 <Grid Background="#FFE5E5E5"/>
