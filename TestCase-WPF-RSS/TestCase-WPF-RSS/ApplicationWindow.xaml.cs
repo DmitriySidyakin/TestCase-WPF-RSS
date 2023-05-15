@@ -294,6 +294,7 @@ namespace TestCase_WPF_RSS
                         {
                             var s = db.Shipments.FirstOrDefault(x => x.Id == selectedId);
                             s.Status = ShipmentStatusEnum.ToWarehouse;
+                            s.Modified = DateTimeOffset.Now;
                             db.Shipments.Update(s);
                             db.SaveChanges();
                         }
@@ -325,6 +326,7 @@ namespace TestCase_WPF_RSS
                         {
                             var s = db.Shipments.FirstOrDefault(x => x.Id == selectedId);
                             s.Status = ShipmentStatusEnum.Sold;
+                            s.Modified = DateTimeOffset.Now;
                             db.Shipments.Update(s);
                             db.SaveChanges();
                         }
