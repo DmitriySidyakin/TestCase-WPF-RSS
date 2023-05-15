@@ -350,12 +350,77 @@ namespace TestCase_WPF_RSS
 
         private void BuildReport()
         {
-            //throw new NotImplementedException();
+            bool? isReceivedChecked = Received_CheckBox.IsChecked;
+            bool? isToWarehouseChecked = ToWarehouse_CheckBox.IsChecked;
+            bool? isSoldChecked = Sold_CheckBox.IsChecked;
+
+            DateTimeOffset? dateTimeOffsetFrom = DatePickerFrom.SelectedDate;
+            DateTimeOffset? dateTimeOffsetTo = DatePickerTo.SelectedDate;
+
+            FillReportDataGrid(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeOffsetFrom, dateTimeOffsetTo);
+        }
+
+ 
+        public void FillReportDataGrid(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTimeOffset? dateTimeOffsetFrom, DateTimeOffset? dateTimeOffsetTo)
+
+        {
+
+            string conString = connectionString ?? "";
+
+            string cmdString = string.Empty;
+
+            try
+            {
+                if (isReceivedChecked == true || isToWarehouseChecked == true || isSoldChecked == true)
+                {
+                    using (SqlConnection con = new SqlConnection(conString))
+
+                    {
+
+                        cmdString = BuildReportQuery(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeOffsetFrom, dateTimeOffsetTo);
+
+                        SqlCommand cmd = new SqlCommand(cmdString, con);
+
+                        SqlDataAdapter sda = new SqlDataAdapter(cmd);
+
+                        DataTable dt = new DataTable("Shipments");
+
+                        sda.Fill(dt);
+
+                        Report_DataGrid.ItemsSource = dt.AsDataView();
+                    }
+                }
+                else
+                {
+                    Report_DataGrid.Items.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Не удалось подключиться к БД!");
+            }
+        }
+
+        private string BuildReportQuery(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTimeOffset? dateTimeOffsetFrom, DateTimeOffset? dateTimeOffsetTo)
+        {
+            string result = @"SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса',
+                              S.Created as 'Создано', S.Modified as 'Изменено'
+                                FROM Shipments as S
+                                LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId
+                            WHERE ({0})";
+
+            string whereStatuses = isReceivedChecked.HasValue && isReceivedChecked.Value ? "S.Status = 0" : "";
+            whereStatuses += isToWarehouseChecked.HasValue && isToWarehouseChecked.Value? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 2" : "";
+            whereStatuses += isSoldChecked.HasValue && isSoldChecked.Value ? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 3" : "";
+
+            result = String.Format(result, whereStatuses);
+
+            return result;
         }
 
         private void ApplyFilter_Click(object sender, RoutedEventArgs e)
         {
-
+            BuildReport();
         }
 
         #endregion
