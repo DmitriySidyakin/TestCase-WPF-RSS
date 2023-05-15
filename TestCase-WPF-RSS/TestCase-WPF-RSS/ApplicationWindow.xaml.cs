@@ -354,14 +354,14 @@ namespace TestCase_WPF_RSS
             bool? isToWarehouseChecked = ToWarehouse_CheckBox.IsChecked;
             bool? isSoldChecked = Sold_CheckBox.IsChecked;
 
-            DateTimeOffset? dateTimeOffsetFrom = DatePickerFrom.SelectedDate;
-            DateTimeOffset? dateTimeOffsetTo = DatePickerTo.SelectedDate;
+            DateTime? dateTimeFrom = DatePickerFrom.SelectedDate;
+            DateTime? dateTimeTo = DatePickerTo.SelectedDate;
 
-            FillReportDataGrid(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeOffsetFrom, dateTimeOffsetTo);
+            FillReportDataGrid(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeFrom, dateTimeTo);
         }
 
- 
-        public void FillReportDataGrid(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTimeOffset? dateTimeOffsetFrom, DateTimeOffset? dateTimeOffsetTo)
+
+        public void FillReportDataGrid(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTime? dateTimeFrom, DateTime? dateTimeTo)
 
         {
 
@@ -377,7 +377,7 @@ namespace TestCase_WPF_RSS
 
                     {
 
-                        cmdString = BuildReportQuery(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeOffsetFrom, dateTimeOffsetTo);
+                        cmdString = BuildReportQuery(isReceivedChecked, isToWarehouseChecked, isSoldChecked, dateTimeFrom, dateTimeTo);
 
                         SqlCommand cmd = new SqlCommand(cmdString, con);
 
@@ -401,19 +401,49 @@ namespace TestCase_WPF_RSS
             }
         }
 
-        private string BuildReportQuery(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTimeOffset? dateTimeOffsetFrom, DateTimeOffset? dateTimeOffsetTo)
+        private string BuildReportQuery(bool? isReceivedChecked, bool? isToWarehouseChecked, bool? isSoldChecked, DateTime? dateTimeFrom, DateTime? dateTimeTo)
         {
             string result = @"SELECT S.Id as 'ИД', S.Status as 'Статус', SS.StatusText AS 'Текст Статуса',
-                              S.Created as 'Создано', S.Modified as 'Изменено'
+                              REPLACE(REPLACE(CONVERT(NVARCHAR, S.Created, 127), 'T', ' '), 'Z', ' ') + 'UTC' as 'Создано', REPLACE(REPLACE(CONVERT(NVARCHAR, S.Modified, 127), 'T', ' '), 'Z', ' ') + 'UTC' as 'Изменено'
                                 FROM Shipments as S
                                 LEFT JOIN ShipmentStatuses as SS ON S.Status = SS.StatusId
-                            WHERE ({0})";
+                            WHERE {0}";
 
             string whereStatuses = isReceivedChecked.HasValue && isReceivedChecked.Value ? "S.Status = 0" : "";
-            whereStatuses += isToWarehouseChecked.HasValue && isToWarehouseChecked.Value? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 1" : "";
+            whereStatuses += isToWarehouseChecked.HasValue && isToWarehouseChecked.Value ? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 1" : "";
             whereStatuses += isSoldChecked.HasValue && isSoldChecked.Value ? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 2" : "";
 
+            if (!String.IsNullOrEmpty(whereStatuses))
+            {
+                whereStatuses = String.Format("({0})", whereStatuses);
+            }
+
             result = String.Format(result, whereStatuses);
+
+            if (dateTimeFrom is not null)
+            {
+                if (String.IsNullOrEmpty(whereStatuses))
+                {
+                    result += "S.Modified >= CONVERT(DATETIME, '" + dateTimeFrom?.ToString("s") + "' , 126)";
+                }
+                else
+                {
+                    result += " AND S.Modified >= CONVERT(DATETIME, '" + dateTimeFrom?.ToString("s") + "' , 126)";
+                }
+
+                if (dateTimeTo is not null)
+                {
+                    if (String.IsNullOrEmpty(whereStatuses) && dateTimeFrom is null)
+                    {
+                        result += "S.Modified <= CONVERT(DATETIME, '" + dateTimeTo?.ToString("s") + "' , 126)";
+                    }
+                    else
+                    {
+                        result += " AND S.Modified <= CONVERT(DATETIME, '" + dateTimeTo?.ToString("s") + "' , 126)";
+                    }
+                }
+
+            }
 
             return result;
         }
