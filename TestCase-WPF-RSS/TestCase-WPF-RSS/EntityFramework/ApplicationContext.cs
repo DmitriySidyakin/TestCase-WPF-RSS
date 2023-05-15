@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using System.Linq;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection.Metadata;
 
 namespace TestCase_WPF_RSS.EntityFramework
 {
@@ -25,6 +26,16 @@ namespace TestCase_WPF_RSS.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(СonnectionString);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Shipments>()
+                .Property(b => b.Created)
+                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
+            modelBuilder.Entity<Shipments>()
+                .Property(b => b.Modified)
+                .HasDefaultValueSql("SYSDATETIMEOFFSET()");
         }
 
         public bool TestConnection(string connectionString)
@@ -83,6 +94,10 @@ namespace TestCase_WPF_RSS.EntityFramework
         public int Id { get; set; }
 
         public ShipmentStatusEnum Status { get; set; }
+
+        public DateTimeOffset Created { get; set; }
+
+        public DateTimeOffset Modified { get; set; }
     }
 
     public enum ShipmentStatusEnum
