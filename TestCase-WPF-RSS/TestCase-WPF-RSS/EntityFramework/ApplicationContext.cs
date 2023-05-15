@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using System.Linq;
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TestCase_WPF_RSS.EntityFramework
 {
@@ -29,18 +30,26 @@ namespace TestCase_WPF_RSS.EntityFramework
                 using (ApplicationContext db = new ApplicationContext(connectionString))
                 {
                     var dbcnf = db.DatabaseConfiguration.ToList();
-                    foreach (DatabaseConfiguration dbc in dbcnf)
+                    int count = dbcnf.Count;
+                    if (count == 0)
                     {
-                        result &= result;
+                        db.DatabaseConfiguration.Add(new EntityFramework.DatabaseConfiguration() { Created = DateTimeOffset.Now });
                     }
                 }
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
 
 
             return result;
         }
     }
 
-    internal class DatabaseConfiguration { }
+    internal class DatabaseConfiguration
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public DateTimeOffset Created { get; set; }
+
+    }
 }
