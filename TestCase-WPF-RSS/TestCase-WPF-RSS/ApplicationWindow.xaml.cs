@@ -410,8 +410,8 @@ namespace TestCase_WPF_RSS
                             WHERE ({0})";
 
             string whereStatuses = isReceivedChecked.HasValue && isReceivedChecked.Value ? "S.Status = 0" : "";
-            whereStatuses += isToWarehouseChecked.HasValue && isToWarehouseChecked.Value? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 2" : "";
-            whereStatuses += isSoldChecked.HasValue && isSoldChecked.Value ? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 3" : "";
+            whereStatuses += isToWarehouseChecked.HasValue && isToWarehouseChecked.Value? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 1" : "";
+            whereStatuses += isSoldChecked.HasValue && isSoldChecked.Value ? (String.IsNullOrEmpty(whereStatuses) ? "" : " OR ") + "S.Status = 2" : "";
 
             result = String.Format(result, whereStatuses);
 
