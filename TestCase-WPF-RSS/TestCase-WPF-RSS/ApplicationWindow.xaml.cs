@@ -353,7 +353,11 @@ namespace TestCase_WPF_RSS
             //throw new NotImplementedException();
         }
 
-        #endregion
+        private void ApplyFilter_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        #endregion
     }
 }

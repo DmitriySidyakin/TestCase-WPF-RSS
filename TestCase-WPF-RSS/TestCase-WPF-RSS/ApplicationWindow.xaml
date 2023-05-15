@@ -65,7 +65,7 @@
                             <CheckBox Name="Received_CheckBox" Content="Принят" HorizontalAlignment="Left" Margin="52,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             <CheckBox Name="ToWarehouse_CheckBox" Content="На склад" HorizontalAlignment="Left" Margin="117,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
                             <CheckBox Name="Sold_CheckBox" Content="Продан" HorizontalAlignment="Left" Margin="190,6,0,0" VerticalAlignment="Top" IsChecked="True"/>
-                            <Button Name="ApplyFilter" Content="Применить фильтр" Margin="372,6,-84,0" Height="50" VerticalAlignment="Top" Click="Button_Click"/>
+                            <Button Name="ApplyFilter" Content="Применить фильтр" Margin="372,6,-84,0" Height="50" VerticalAlignment="Top" Click="ApplyFilter_Click"/>
                         </Grid>
                     </GroupBox>
                 </Grid>
